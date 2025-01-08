@@ -5,10 +5,12 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 ## Library
 
-| GitHub                                      | From        | Year | Desc                                            |
-| ------------------------------------------- | ----------- | ---- | ----------------------------------------------- |
-| [trl](https://github.com/huggingface/trl)   | HuggingFace | 2024 | Train LM with RL                                |
-| [RL4LMs](https://github.com/allenai/RL4LMs) | Allen       | 2023 | RL library to fine-tune LM to human preferences |
+| GitHub                                      | From        | Year | Desc                                                         |
+| ------------------------------------------- | ----------- | ---- | ------------------------------------------------------------ |
+| [PRIME](https://github.com/PRIME-RL/PRIME)  | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
+| [vlRL](https://github.com/volcengine/verl)  | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
+| [trl](https://github.com/huggingface/trl)   | HuggingFace | 2024 | Train LM with RL                                             |
+| [RL4LMs](https://github.com/allenai/RL4LMs) | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
 
 ## Paper
 
