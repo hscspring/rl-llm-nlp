@@ -5,17 +5,20 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 ## Library
 
-| GitHub                                      | From        | Year | Desc                                                         |
-| ------------------------------------------- | ----------- | ---- | ------------------------------------------------------------ |
-| [PRIME](https://github.com/PRIME-RL/PRIME)  | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
-| [vlRL](https://github.com/volcengine/verl)  | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
-| [trl](https://github.com/huggingface/trl)   | HuggingFace | 2024 | Train LM with RL                                             |
-| [RL4LMs](https://github.com/allenai/RL4LMs) | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
+| GitHub                                                       | From        | Year | Desc                                                         |
+| ------------------------------------------------------------ | ----------- | ---- | ------------------------------------------------------------ |
+| [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
+| [vlRL](https://github.com/volcengine/verl)                   | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
+| [trl](https://github.com/huggingface/trl)                    | HuggingFace | 2024 | Train LM with RL                                             |
+| [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
+| [alignment-handbook](https://github.com/huggingface/alignment-handbook) | huggingface | 2023 | Robust recipes to align language models with human and AI preferences |
 
 ## Paper
 
 | Title                                                        | From        | Year | Link                                                         |
 | ------------------------------------------------------------ | ----------- | ---- | ------------------------------------------------------------ |
+| Process Reinforcement through Implicit Rewards               |             | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) |
+| rStar: Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers | MicroSoft   | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) |
 | A Closer Look at Machine Unlearning for Large Language Models | Sea AI      | 2024 | [paper](https://arxiv.org/abs/2410.08109v1), [GitHub](https://github.com/sail-sg/closer-look-LLM-unlearning) |
 | Direct Preference Optimization: Your Language Model is Secretly a Reward Model | Stanford    | 2024 | [paper](https://arxiv.org/abs/2305.18290)                    |
 | A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More | Salesforce  | 2024 | [paper](https://arxiv.org/abs/2407.16216)                    |
