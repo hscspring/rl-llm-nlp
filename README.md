@@ -17,6 +17,7 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 | Cate    | Abbr                   | Title                                                        | From                    | Year | Link                                                         |
 | ------- | ---------------------- | ------------------------------------------------------------ | ----------------------- | ---- | ------------------------------------------------------------ |
+| RL      |                        | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1)          |
 | SLM     | PRIME                  | Process Reinforcement through Implicit Rewards               | PRIME-RL                | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) |
 | SLM     | rStar                  | rStar: Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers | MicroSoft               | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) |
 | Unlearn |                        | A Closer Look at Machine Unlearning for Large Language Models | Sea AI                  | 2024 | [paper](https://arxiv.org/abs/2410.08109v1), [GitHub](https://github.com/sail-sg/closer-look-LLM-unlearning) |
