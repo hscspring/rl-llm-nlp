@@ -8,6 +8,8 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 | GitHub                                                       | From        | Year | Desc                                                         |
 | ------------------------------------------------------------ | ----------- | ---- | ------------------------------------------------------------ |
 | [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
+| [rStar](https://github.com/microsoft/rStar)                  | MicroSoft   | 2025 |                                                              |
+| [DeepSeek R1-Zero](https://github.com/Jiayi-Pan/TinyZero)    | Jiayi-Pan   | 2025 | Clean, minimal, accessible reproduction of DeepSeek R1-Zero  |
 | [veRL](https://github.com/volcengine/verl)                   | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
 | [trl](https://github.com/huggingface/trl)                    | HuggingFace | 2024 | Train LM with RL                                             |
 | [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
@@ -20,6 +22,7 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 | RL      |                        | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1)          |
 | SLM     | PRIME                  | Process Reinforcement through Implicit Rewards               | PRIME-RL                | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) |
 | SLM     | rStar                  | rStar: Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers | MicroSoft               | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) |
+| SLM     | rStar-Math             | rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking | MicroSoft               | 2025 | [paper](https://arxiv.org/abs/2501.04519), [GitHub](https://github.com/microsoft/rStar) |
 | Unlearn |                        | A Closer Look at Machine Unlearning for Large Language Models | Sea AI                  | 2024 | [paper](https://arxiv.org/abs/2410.08109v1), [GitHub](https://github.com/sail-sg/closer-look-LLM-unlearning) |
 | Unlearn | Quark                  | Quark: Controllable Text Generation with Reinforced [Un]learning | Allen                   | 2022 | [paper](http://arxiv.org/abs/2205.13636), [GitHub](https://github.com/GXimingLu/Quark) |
 | Align   | ReMax                  | ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models | CUHK                    | 2024 | [paper](https://arxiv.org/abs/2310.10505)                    |
