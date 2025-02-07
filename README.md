@@ -9,7 +9,6 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 | ------------------------------------------------------------ | ----------- | ---- | ------------------------------------------------------------ |
 | [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
 | [rStar](https://github.com/microsoft/rStar)                  | MicroSoft   | 2025 |                                                              |
-| [DeepSeek R1-Zero](https://github.com/Jiayi-Pan/TinyZero)    | Jiayi-Pan   | 2025 | Clean, minimal, accessible reproduction of DeepSeek R1-Zero  |
 | [veRL](https://github.com/volcengine/verl)                   | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
 | [trl](https://github.com/huggingface/trl)                    | HuggingFace | 2024 | Train LM with RL                                             |
 | [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
@@ -19,7 +18,7 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 | Cate    | Abbr                   | Title                                                        | From                    | Year | Link                                                         |
 | ------- | ---------------------- | ------------------------------------------------------------ | ----------------------- | ---- | ------------------------------------------------------------ |
-| RL      |                        | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1)          |
+| RL      | R1                     | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1), ①       |
 | SLM     | PRIME                  | Process Reinforcement through Implicit Rewards               | PRIME-RL                | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) |
 | SLM     | rStar                  | rStar: Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers | MicroSoft               | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) |
 | SLM     | rStar-Math             | rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking | MicroSoft               | 2025 | [paper](https://arxiv.org/abs/2501.04519), [GitHub](https://github.com/microsoft/rStar) |
@@ -40,3 +39,10 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 | Policy  | REINFORCE multi-sample | Buy 4 Reinforce Samples, Get a Baseline for Free!            | University of Amsterdam | 2019 | [paper](https://openreview.net/pdf?id=r1lgTGL5DE)            |
 | Policy  | REINFORCE              | Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning | Northeastern University | 1992 | [paper](https://people.cs.umass.edu/~barto/courses/cs687/williams92simple.pdf) |
 
+## Appendix
+
+- ① DeepSeek-R1相关复现：
+    - [Jiayi-Pan/TinyZero: Clean, minimal, accessible reproduction of DeepSeek R1-Zero](https://github.com/Jiayi-Pan/TinyZero)
+    - [huggingface/open-r1: Fully open reproduction of DeepSeek-R1](https://github.com/huggingface/open-r1)
+    - [hkust-nlp/simpleRL-reason: This is a replicate of DeepSeek-R1-Zero and DeepSeek-R1 training on small models with limited data](https://github.com/hkust-nlp/simpleRL-reason)
+    - [ZihanWang314/RAGEN: RAGEN is the first open-source reproduction of DeepSeek-R1 on AGENT training.](https://github.com/ZihanWang314/ragen)
