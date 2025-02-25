@@ -18,6 +18,8 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 | Cate       | Abbr                   | Title                                                        | From                    | Year | Link                                                         |
 | ---------- | ---------------------- | ------------------------------------------------------------ | ----------------------- | ---- | ------------------------------------------------------------ |
+| o1         | Sky-T1                 | Sky-T1: Train your own O1 preview model within $450          | NovaSky-AI              | 2025 | [GitHub](https://github.com/NovaSky-AI/SkyThought)           |
+| o1         | STILL                  | A series of technical report on Slow Thinking with LLM       | RUCAIBox                | 2025 | [GitHub](https://github.com/RUCAIBox/Slow_Thinking_with_LLMs) |
 | RL         | OREAL                  | Exploring the Limit of Outcome Reward for Learning Mathematical Reasoning | InternLM                | 2025 | [paper](https://arxiv.org/abs/2502.06781), [GitHub](https://github.com/InternLM/OREAL) |
 | RL Scaling | LIMR                   | LIMR: Less is More for RL Scaling                            | GAIR-NLP                | 2025 | [paper](https://arxiv.org/abs/2502.11886), [GitHub](https://github.com/GAIR-NLP/LIMR) |
 | RL         | R1                     | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1), ①       |
