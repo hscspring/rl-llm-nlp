@@ -5,14 +5,15 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 
 ## Library
 
-| GitHub                                                       | From        | Year | Desc                                                         |
-| ------------------------------------------------------------ | ----------- | ---- | ------------------------------------------------------------ |
-| [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL    | 2025 | Scalable RL solution for the advanced reasoning of language models |
-| [rStar](https://github.com/microsoft/rStar)                  | MicroSoft   | 2025 |                                                              |
-| [veRL](https://github.com/volcengine/verl)                   | Bytedance   | 2024 | Volcano Engine Reinforcement Learning for LLM                |
-| [trl](https://github.com/huggingface/trl)                    | HuggingFace | 2024 | Train LM with RL                                             |
-| [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen       | 2023 | RL library to fine-tune LM to human preferences              |
-| [alignment-handbook](https://github.com/huggingface/alignment-handbook) | huggingface | 2023 | Robust recipes to align language models with human and AI preferences |
+| GitHub                                                       | From              | Year | Desc                                                         |
+| ------------------------------------------------------------ | ----------------- | ---- | ------------------------------------------------------------ |
+| [prime-rl](https://github.com/PrimeIntellect-ai/prime-rl)    | PrimeIntellect-ai | 2025 | Prime-rl is a codebase for decentralized RL training at scale. |
+| [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL          | 2025 | Scalable RL solution for the advanced reasoning of language models |
+| [rStar](https://github.com/microsoft/rStar)                  | MicroSoft         | 2025 |                                                              |
+| [veRL](https://github.com/volcengine/verl)                   | Bytedance         | 2024 | Volcano Engine Reinforcement Learning for LLM                |
+| [trl](https://github.com/huggingface/trl)                    | HuggingFace       | 2024 | Train LM with RL                                             |
+| [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen             | 2023 | RL library to fine-tune LM to human preferences              |
+| [alignment-handbook](https://github.com/huggingface/alignment-handbook) | huggingface       | 2023 | Robust recipes to align language models with human and AI preferences |
 
 ## Paper
 
@@ -25,9 +26,12 @@ I consider RL to be a pivotal technology in the field of AI, and NLP (particular
 | RL           | OREAL                  | Exploring the Limit of Outcome Reward for Learning Mathematical Reasoning | InternLM                | 2025 | [paper](https://arxiv.org/abs/2502.06781), [GitHub](https://github.com/InternLM/OREAL) |
 | RL           | R1                     | DeepSeek-R1                                                  | DeepSeek                | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1), ①       |
 |              |                        |                                                              |                         |      |                                                              |
+|              |                        |                                                              |                         |      |                                                              |
+|              |                        |                                                              |                         |      |                                                              |
 | o1           | Sky-T1                 | Sky-T1: Train your own O1 preview model within $450          | NovaSky-AI              | 2025 | [GitHub](https://github.com/NovaSky-AI/SkyThought)           |
 | o1           | STILL                  | A series of technical report on Slow Thinking with LLM       | RUCAIBox                | 2025 | [GitHub](https://github.com/RUCAIBox/Slow_Thinking_with_LLMs) |
 |              |                        |                                                              |                         |      |                                                              |
+| RL Scaling   | RM                     | Inference-Time Scaling for Generalist Reward Modeling        | DeepSeek                | 2025 | [paper](https://arxiv.org/abs/2504.02495)                    |
 | RL Scaling   | LIMR                   | LIMR: Less is More for RL Scaling                            | GAIR-NLP                | 2025 | [paper](https://arxiv.org/abs/2502.11886), [GitHub](https://github.com/GAIR-NLP/LIMR) |
 | RL Scaling   | DeepScaleR             | DeepScaleR: Surpassing O1-Preview with a 1.5B Model by Scaling RL | Agentica                | 2025 | [paper](https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2), [GitHub](https://github.com/agentica-project/deepscaler) |
 | RL Scaling   | ScalingLaw             | Value-Based Deep RL Scales Predictably                       | Berkeley                | 2025 | [paper](https://arxiv.org/abs/2502.04327)                    |
