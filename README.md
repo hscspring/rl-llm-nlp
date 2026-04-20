@@ -1,86 +1,304 @@
 # RL-LLM-NLP
-This repository encompasses libraries and papers on Reinforcement Learning (RL) within Large Language Models (LLM) and Natural Language Processing (NLP).
 
-I consider RL to be a pivotal technology in the field of AI, and NLP (particularly LLM) to be a direction well worth exploring.
+> **A curated, opinionated index of post-R1 LLM × Reinforcement Learning.**
+> Every paper is read, classified, cross-linked, and connected back to a Chinese deep-dive blog post by [hscspring (长琴)](https://yam.gift).
+
+I consider RL to be a pivotal technology in the field of AI, and NLP (particularly LLM) to be a direction well worth exploring. This repo focuses on **post-R1 LLM RL** specifically.
+
+## Why this repo (and not another Awesome list)
+
+Awesome lists are *retrievers*. This repo is a *curator*.
+
+- **Has a verdict, not a vote.** Each of the 5 tracks ends with the author's bottom-line judgment ("data sets the ceiling, algorithms approach it"; "most RL is sampling polish, not extrapolation"; "all internal-feedback methods compress entropy → exploration crisis"), not a paper summary.
+- **Cross-links across papers.** RLOO ≡ GRPO with Fnorm=1 (derived in GiGPO); REINFORCE + IS → CISPO loss (extended in CISPO); Activation Steering & Context Engineering are the *upstream signals* of Training-Free RL. These connections only surface when one person reads everything.
+- **A narrative, not a database.** The Chronological Blog Timeline reads as a year-and-a-half *editorial arc* through post-R1 RL × LLM: Feb-2025 R1 → GRPO family → Reward modeling → MoE stability → Training-Free RL.
+- **Personal historical anchors.** Pre-R1 works (RL4LMs, FTHP, Quark, DT) live in their own corner with a one-line *why I personally cared*, not as bibliography filler.
+
+**Topics covered**: DeepSeek-R1 reproduction · GRPO family (DAPO / Dr.GRPO / VAPO / CISPO / GiGPO / GSPO / GMPO / GTPO / Reinforce++) · PPO · RLHF · DPO · Reward Modeling · Verifier-Free RL · MoE RL Stability · Training-Free RL · Activation Steering · Agentic RL.
+
+> **Notes ("我的解读") link to Chinese blog posts on [yam.gift](https://yam.gift). The link text preserves the original Chinese title.**
+
+---
+
+## 5 Tracks · The Author's Verdicts
+
+Blog posts on [yam.gift](https://yam.gift) are grouped into 5 tracks. Each verdict below is the author's own bottom-line judgment, not a paper summary.
+
+### Track 01 — R1 Full-Chain (2025)
+
+> Parsing the original report, then digging into the data / paradigm / experiment side.
+
+- **Core thesis**: data sets the ceiling, algorithms only approach it. Pure rule-based RL is finally validated as a viable path.
+- **The frame that survived**: "Base+SFT / Base+RL / SFT+RL" can absorb almost all subsequent variations.
+- **Loose ends still being chased**: R1-Zero behavior differs sharply across base models (SimpleRL-Zoo, Yarz-Logic); LIMO/s1 confirm "less is more on *activation*, not on *teaching*".
+
+### Track 02 — GRPO Family & Engineering Refinements (2025–2026)
+
+> Every GRPO variant — DAPO / Dr.GRPO / VAPO / CISPO / GiGPO / GSPO / GMPO / GTPO / Reinforce++ / industry showcases.
+
+- **Core thesis**: every variant is paying off the *same* engineering debt — token vs. sequence-level, clip tighter/wider, length normalization, KL choice (k2 vs k3), advantage global-normalization.
+- **Convergence**: the GRPO objective increasingly looks like a "people's edition" of PPO with global advantage and no critic.
+- **Sub-thread**: clip is not just a stability knob — it directly *shapes* the explore/exploit boundary. Spurious Rewards, Clip-Higher (DAPO), Clip-Wider (GMPO) are all moves on the same axis.
+
+### Track 03 — Reward Modeling, Data & Verifiers (2025)
+
+> RM / RM-Data / Verifier-Free / Self-Verified / Verify-Free RL.
+
+- **Drift 1 (modeling)**: from single scalar → "principles + critique + self-verification" (DeepSeek-GRM → DeepSeekMath-V2).
+- **Drift 2 (data)**: good reward data is more like *unlocking* the base model's existing capabilities than *teaching* new ones (Skywork-Reward-V2, Spurious Rewards).
+- **Drift 3 (Verify-Free)**: when no external verifier exists, all internal-feedback methods (TTRL / EM / RENT / EMPO / Intuitor) end up *compressing* entropy. Long-term, an exploration crisis is inevitable — ETTRL / Darling / EVOL-RL / RESTRAIN are all band-aids on the same wound.
+
+### Track 04 — MoE RL Stability (2026)
+
+> R3 / IcePop / TIS / KAT-Coder.
+
+- **Surface diagnosis**: train-infer router mismatch is what everyone first noticed.
+- **Deeper cause**: logprob estimation noise on MoE is not neutral; even *recomputing* logprobs drifts. The importance ratio (π_new/π_old) — heart of GRPO — is silently diluted on MoE.
+- **Open bet**: GSPO/GMPO's sequence-level + geometric-mean might be MoE-RL-friendly; not yet validated at production scale.
+
+### Track 05 — Paradigm Frontier (2025–2026)
+
+> Training-Free / Experiential / Real-time / Planning / RL Boundary.
+
+- **Boundary realization**: most RL is just sampling polish (Yue), *not* true pass@k extrapolation.
+- **Counter-evidence**: ProRL / DELTA show extrapolation is possible — but only with edge data + process reward + avoiding "all-zero pass@k" cold start.
+- **Upstream signals (already in 2025 H2)**: "Activation Steering" and "Context Engineering" both pointed in this direction *before* Training-Free RL had a name — behavior can be shaped without touching weights.
+- **New paradigm A — Training-Free RL**: advantage lives in text/context, not in weight space (TRT, Training-Free GRPO, MemAPO, Update-Free Steering).
+- **New paradigm B — Experience-as-RL**: the loop becomes "trajectory → information gain → re-supervision". Reflection, meta-search and open-ended learning are all data-construction tricks in disguise.
+- **Higher-level question**: "reasoning" should be studied as a *data format*, not as an RL task (Think-Strategy / LEPA).
+
+---
 
 ## Library
 
-| GitHub                                                       | From              | Year | Desc                                                         |
-| ------------------------------------------------------------ | ----------------- | ---- | ------------------------------------------------------------ |
-|                                                              |                   |      |                                                              |
-| [prime-rl](https://github.com/PrimeIntellect-ai/prime-rl)    | PrimeIntellect-ai | 2025 | Prime-rl is a codebase for decentralized RL training at scale. |
-| [PRIME](https://github.com/PRIME-RL/PRIME)                   | PRIME-RL          | 2025 | Scalable RL solution for the advanced reasoning of language models |
-| [rStar](https://github.com/microsoft/rStar)                  | MicroSoft         | 2025 |                                                              |
-| [veRL](https://github.com/volcengine/verl)                   | Bytedance         | 2024 | Volcano Engine Reinforcement Learning for LLM                |
-| [trl](https://github.com/huggingface/trl)                    | HuggingFace       | 2024 | Train LM with RL                                             |
-| [RL4LMs](https://github.com/allenai/RL4LMs)                  | Allen             | 2023 | RL library to fine-tune LM to human preferences              |
-| [alignment-handbook](https://github.com/huggingface/alignment-handbook) | huggingface       | 2023 | Robust recipes to align language models with human and AI preferences |
+| GitHub | From | Year | Description |
+|--------|------|------|-------------|
+| [prime-rl](https://github.com/PrimeIntellect-ai/prime-rl) | PrimeIntellect-ai | 2025 | Decentralized large-scale RL training framework |
+| [PRIME](https://github.com/PRIME-RL/PRIME) | PRIME-RL | 2025 | Scalable RL recipe for reasoning |
+| [rStar](https://github.com/microsoft/rStar) | Microsoft | 2025 | Self-evolved deep reasoning for SLMs |
+| [veRL](https://github.com/volcengine/verl) | ByteDance | 2024 | LLM RL training framework (Volcano Engine) |
+| [trl](https://github.com/huggingface/trl) | HuggingFace | 2024 | Train language models with RL |
+| [RL4LMs](https://github.com/allenai/RL4LMs) | Allen | 2023 | Aligning LMs to human preference via RL |
+| [alignment-handbook](https://github.com/huggingface/alignment-handbook) | HuggingFace | 2023 | Recipes for aligning to human/AI preference |
 
-## Paper
+---
 
-| Cate         | Abbr                   | Title                                                        | From                              | Year | Link                                                         |
-| ------------ | ---------------------- | ------------------------------------------------------------ | --------------------------------- | ---- | ------------------------------------------------------------ |
-| RL           | MRT                    | Optimizing Test-Time Compute via Meta Reinforcement Fine-Tuning | Carnegie Mellon                   | 2025 | [paper](http://arxiv.org/abs/2503.07572), [GitHub](https://github.com/CMU-AIRe/MRT) |
-| RL           | L1, LCPO               | L1: Controlling How Long A Reasoning Model Thinks With Reinforcement Learning | Carnegie Mellon                   | 2025 | [paper](http://arxiv.org/abs/2503.04697), [GitHub](https://github.com/cmu-l3/l1) |
-| RL           | Online-DPO-R1          | Online-DPO-R1: Unlocking Effective Reasoning Without the PPO Overhead | Salesforce AI Research            | 2025 | [paper](https://efficient-unicorn-451.notion.site/Online-DPO-R1-Unlocking-Effective-Reasoning-Without-the-PPO-Overhead-1908b9a70e7b80c3bc83f4cf04b2f175), [GitHub](https://github.com/RLHFlow/Online-DPO-R1) |
-| RL           | orz                    | Open-Reasoner-Zero: An Open Source Approach to Scaling Up Reinforcement Learning on the Base Model | StepFun                           | 2025 | [paper](https://github.com/Open-Reasoner-Zero/Open-Reasoner-Zero/blob/main/ORZ_paper.pdf), [GitHub](https://github.com/Open-Reasoner-Zero/Open-Reasoner-Zero/tree/main) |
-| RL           | OREAL                  | Exploring the Limit of Outcome Reward for Learning Mathematical Reasoning | InternLM                          | 2025 | [paper](https://arxiv.org/abs/2502.06781), [GitHub](https://github.com/InternLM/OREAL) |
-| RL           | R1                     | DeepSeek-R1                                                  | DeepSeek                          | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1), ①       |
-| RL           | RM                     | DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning | DeepSeek                          | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-Math-V2), [GitHub](https://github.com/deepseek-ai/DeepSeek-Math-V2) |
-|              |                        |                                                              |                                   |      |                                                              |
-| o1           | Sky-T1                 | Sky-T1: Train your own O1 preview model within $450          | NovaSky-AI                        | 2025 | [GitHub](https://github.com/NovaSky-AI/SkyThought)           |
-| o1           | STILL                  | A series of technical report on Slow Thinking with LLM       | RUCAIBox                          | 2025 | [GitHub](https://github.com/RUCAIBox/Slow_Thinking_with_LLMs) |
-|              |                        |                                                              |                                   |      |                                                              |
-| RL Scaling   | RM                     | Inference-Time Scaling for Generalist Reward Modeling        | DeepSeek                          | 2025 | [paper](https://arxiv.org/abs/2504.02495)                    |
-| RL Scaling   | LIMR                   | LIMR: Less is More for RL Scaling                            | GAIR-NLP                          | 2025 | [paper](https://arxiv.org/abs/2502.11886), [GitHub](https://github.com/GAIR-NLP/LIMR) |
-| RL Scaling   | DeepScaleR             | DeepScaleR: Surpassing O1-Preview with a 1.5B Model by Scaling RL | Agentica                          | 2025 | [paper](https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2), [GitHub](https://github.com/agentica-project/deepscaler) |
-| RL Scaling   | ScalingLaw             | Value-Based Deep RL Scales Predictably                       | Berkeley                          | 2025 | [paper](https://arxiv.org/abs/2502.04327)                    |
-|              |                        |                                                              |                                   |      |                                                              |
-| SLM          | PRIME                  | Process Reinforcement through Implicit Rewards               | PRIME-RL                          | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) |
-| SLM          | rStar-Math             | rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking | MicroSoft                         | 2025 | [paper](https://arxiv.org/abs/2501.04519), [GitHub](https://github.com/microsoft/rStar) |
-| SLM          | rStar                  | rStar: Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers | MicroSoft                         | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) |
-|              |                        |                                                              |                                   |      |                                                              |
-| Unlearn      |                        | A Closer Look at Machine Unlearning for Large Language Models | Sea AI                            | 2024 | [paper](https://arxiv.org/abs/2410.08109v1), [GitHub](https://github.com/sail-sg/closer-look-LLM-unlearning) |
-| Unlearn      | Quark                  | Quark: Controllable Text Generation with Reinforced [Un]learning | Allen                             | 2022 | [paper](http://arxiv.org/abs/2205.13636), [GitHub](https://github.com/GXimingLu/Quark) |
-|              |                        |                                                              |                                   |      |                                                              |
-| Align        | ReMax                  | ReMax: A Simple, Effective, and Efficient Reinforcement Learning Method for Aligning Large Language Models | CUHK                              | 2024 | [paper](https://arxiv.org/abs/2310.10505)                    |
-| Align        |                        | A Comprehensive Survey of LLM Alignment Techniques: RLHF, RLAIF, PPO, DPO and More | Salesforce                        | 2024 | [paper](https://arxiv.org/abs/2407.16216)                    |
-| Align        |                        | Unpacking DPO and PPO: Disentangling Best Practices for Learning from Preference Feedback | Allen                             | 2024 | [paper](https://arxiv.org/abs/2406.09279), [GitHub](https://github.com/hamishivi/EasyLM) |
-| Align        |                        | Preference Tuning with Human Feedback on Language, Speech, and Vision Tasks: A Survey | Capital One                       | 2024 | [paper](http://arxiv.org/abs/2409.11564)                     |
-| Align        | RLHF                   | Training language models to follow instructions with human feedback | OpenAI                            | 2022 | [paper](https://arxiv.org/abs/2203.02155)                    |
-| Align        | NLPO                   | Is Reinforcement Learning (Not) for Natural Language Processing: Benchmarks, Baselines, and Building Blocks for Natural Language Policy Optimization | Allen                             | 2022 | [paper](http://arxiv.org/abs/2210.01241), [GitHub](https://github.com/allenai/rl4lms) |
-| Align        | FTHP                   | Fine-Tuning Language Models from Human Preferences           | OpenAI                            | 2020 | [paper](http://arxiv.org/abs/1909.08593), [GitHub](https://github.com/openai/lm-human-preferences) |
-| Align        | RLOO                   | Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs | Cohere                            | 2024 | [paper](https://arxiv.org/abs/2402.14740)                    |
-|              |                        |                                                              |                                   |      |                                                              |
-| MoE          | IcePop                 | Small Leak Can Sink a Great Ship—Boost RL Training on MoE with 𝑰𝒄𝒆𝑷𝒐𝒑! | Ant                               | 2025 | [paper](https://ringtech.notion.site/icepop)                 |
-| MoE          | TIS                    | Your Efficient RL Framework Secretly Brings You Off-Policy RL Training | UCSD                              | 2025 | [paper](https://fengyao.notion.site/off-policy-rl)           |
-| MoE          | R3                     | Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers | Xiaomi                            | 2025 | [paper](https://arxiv.org/abs/2510.11370)                    |
-| Optimization | KimiRL                 | Kimi k1.5: Scaling Reinforcement Learning with LLMs          | Kimi                              | 2025 | [paper](https://arxiv.org/abs/2501.12599)                    |
-| Optimization | SAPO                   | Soft Adaptive Policy Optimization                            | Qwen                              | 2026 | [paper](https://arxiv.org/abs/2511.20347)                    |
-| Optimization | MOPD                   | MiMo-V2-Flash Technical Report                               | Xiaomi                            | 2026 | [paper](https://arxiv.org/abs/2601.02780)                    |
-| Optimization | AGAPO                  | EXAONE 4.0: Unified Large Language Models Integrating Non-reasoning and Reasoning Modes | LG AI                             | 2025 | [paper](https://arxiv.org/abs/2507.11407)                    |
-| Optimization | Reinforce++            | REINFORCE++: Stabilizing Critic-Free Policy Optimization with Global Advantage Normalization | OpenRLHF                          | 2025 | [paper](https://arxiv.org/abs/2501.03262), [GitHub](https://github.com/OpenRLHF/OpenRLHF/blob/db49b3285282429c5d16c8ffb5f56b196b0bc4f6/openrlhf/trainer/ppo_utils/experience_maker.py#L719) |
-| Optimization | DCPO                   | DCPO: Dynamic Clipping Policy Optimization                   | Baichuan                          | 2025 | [paper](https://arxiv.org/abs/2509.02333), [GitHub](https://github.com/lime-RL/DCPO) |
-| Optimization | OPO                    | On-Policy RL with Optimal Reward Baseline                    | MicroSoft                         | 2025 | [paper](https://arxiv.org/abs/2505.23585), [GitHub](https://verl.readthedocs.io/en/latest/algo/opo.html) |
-| Optimization | SRPO                   | SRPO: A Cross-Domain Implementation of Large-Scale Reinforcement Learning on LLM | Kuaishou                          | 2025 | [paper](https://arxiv.org/abs/2504.14286), [Huggingface](https://huggingface.co/Kwaipilot/SRPO-Qwen-32B) |
-| Optimization | GMPO                   | Geometric-Mean Policy Optimization                           | UCAS, MicroSoft                   | 2025 | [paper](https://arxiv.org/abs/2507.20673), [GitHub](https://github.com/callsys/GMPO) |
-| Optimization | GSPO                   | Group Sequence Policy Optimization                           | Qwen                              | 2025 | [paper](https://arxiv.org/abs/2507.18071)                    |
-| Optimization | GiGPO                  | Group-in-Group Policy Optimization for LLM Agent Training    | Nanyang Technological, Skywork AI | 2025 | [paper](https://arxiv.org/abs/2505.10978),  [GitHub](https://github.com/langfengQ/verl-agent) |
-| Optimization | CISPO                  | MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention | MiniMax                           | 2025 | [paper](https://arxiv.org/abs/2506.13585), [GitHub](https://github.com/MiniMax-AI/MiniMax-M1) |
-| Optimization | VAPO                   | VAPO: Efficient and Reliable Reinforcement Learning for Advanced Reasoning Tasks | ByteDance Seed                    | 2025 | [paper](https://arxiv.org/abs/2504.05118)                    |
-| Optimization | Dr. DAPO               | Understanding R1-Zero-Like Training: A Critical Perspective  | Sea AI Lab                        | 2025 | [paper](http://arxiv.org/abs/2503.20783), [GitHub](https://github.com/sail-sg/understand-r1-zero) |
-| Optimization | DAPO                   | DAPO: An Open-Source LLM Reinforcement Learning System at Scale | ByteDance Seed                    | 2025 | [paper](https://arxiv.org/abs/2503.14476), [GitHub](https://github.com/BytedTsinghua-SIA/DAPO) |
-| Optimization | GRPO                   | DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models | DeepSeek                          | 2024 | [paper](https://arxiv.org/abs/2402.03300)                    |
-| Optimization | DPO                    | Direct Preference Optimization: Your Language Model is Secretly a Reward Model | Stanford                          | 2024 | [paper](https://arxiv.org/abs/2305.18290)                    |
-| Optimization | DT                     | Decision Transformer: Reinforcement Learning via Sequence Modeling | Berkeley                          | 2021 | [paper](https://arxiv.org/abs/2106.01345), [GitHub](https://github.com/kzl/decision-transformer) |
-| Optimization | PPO                    | Proximal Policy Optimization Algorithms                      | OpenAI                            | 2017 | [paper](https://arxiv.org/abs/1707.06347)                    |
-| Optimization | REINFORCE multi-sample | Buy 4 Reinforce Samples, Get a Baseline for Free!            | University of Amsterdam           | 2019 | [paper](https://openreview.net/pdf?id=r1lgTGL5DE)            |
-| Optimization | REINFORCE              | Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning | Northeastern University           | 1992 | [paper](https://people.cs.umass.edu/~barto/courses/cs687/williams92simple.pdf) |
+## Papers
+
+Notation for the **My Notes** column:
+- `[short title](url)` — full Chinese deep-dive available (yam.gift blog or book chapter)
+- `(omnibus → ...)` — covered as a main thread in a survey/overview blog
+- `(<verb: derived/extended/contrasted/described/framed/criticized/...> in [blog]: ...)` — touched on as a sub-topic inside another deep-dive, with a one-line pointer; multiple pointers can be chained with `;`
+- *to-write* — not yet written
+
+### RL Reasoning Reproduction (R1 and Beyond)
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| R1 | DeepSeek-R1: Incentivizing Reasoning Capability via RL | DeepSeek | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-R1) | [DeepSeek R1 深度技术解析及其影响](https://yam.gift/2025/02/17/NLP/LLM-Training/2025-02-17-DeepSeek-R1/) |
+| LIMO | LIMO: Less Is More for Reasoning | SJTU | 2025 | [paper](https://arxiv.org/abs/2502.03387) | [少量高质量数据 SFT 激活推理](https://yam.gift/2025/02/18/NLP/LLM-Training/2025-02-18-LLM-PostTrain-SFT-Data/) |
+| s1 | s1: Simple test-time scaling | Stanford | 2025 | [paper](https://arxiv.org/abs/2501.19393) | (omnibus → [SFT-Data](https://yam.gift/2025/02/18/NLP/LLM-Training/2025-02-18-LLM-PostTrain-SFT-Data/)) |
+| R1 Survey | The R1-era LLM new paradigm | — | 2025 | — | [DeepSeek R1 后 LLM 新范式](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/) |
+| R1-Zero+ | Further understanding of R1-Zero | — | 2025 | — | [R1-Zero 的进一步理解和探索](https://yam.gift/2025/04/10/NLP/LLM-Training/2025-04-10-Think-More-about-R1-Zero/) |
+| SimpleRL-Zoo | SimpleRL-Zoo: R1-Zero RL across diverse base models | HKUST | 2025 | [paper](https://arxiv.org/abs/2503.18892) | (omnibus → [Think-More-about-R1-Zero](https://yam.gift/2025/04/10/NLP/LLM-Training/2025-04-10-Think-More-about-R1-Zero/)) |
+| FastCuRL | FastCuRL: Curriculum RL with Stage-wise Context Scaling | — | 2025 | [paper](https://arxiv.org/abs/2503.17287) | (omnibus → [Think-More-about-R1-Zero](https://yam.gift/2025/04/10/NLP/LLM-Training/2025-04-10-Think-More-about-R1-Zero/)) |
+| Logic-RL | Logic-RL: Unleashing LLM Reasoning with Rule-Based RL | — | 2025 | [paper](https://arxiv.org/abs/2502.14768) | [Yarz-Logic：R1-Zero 相关实验报告](https://yam.gift/2025/04/26/NLP/LLM-Training/2025-04-26-R1-Zero-Lab-Yarz-Logic/) |
+| Seed-Thinking | Seed-Thinking-v1.5: Advancing Superb Reasoning | ByteDance | 2025 | [paper](https://arxiv.org/abs/2504.13914) | [R1 后范式最佳实践：Seed-Thinking 和 Qwen3](https://yam.gift/2025/05/01/NLP/LLM-Training/2025-05-01-Seed-Thinking-Qwen3/) |
+| Qwen3 | Qwen3 Technical Report | Qwen | 2025 | [paper](https://arxiv.org/abs/2505.09388) | (omnibus → [Seed-Thinking-Qwen3](https://yam.gift/2025/05/01/NLP/LLM-Training/2025-05-01-Seed-Thinking-Qwen3/)) |
+
+### RL Data Selection & Scaling
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| LIMR | LIMR: Less is More for RL Scaling | GAIR-NLP | 2025 | [paper](https://arxiv.org/abs/2502.11886), [GitHub](https://github.com/GAIR-NLP/LIMR) | [R1 相关：RL 数据选择与 Scaling](https://yam.gift/2025/02/27/NLP/LLM-Training/2025-02-27-LLM-PostTrain-PPO-Data/) |
+| ORZ | Open-Reasoner-Zero | StepFun | 2025 | [paper](https://github.com/Open-Reasoner-Zero/Open-Reasoner-Zero/blob/main/ORZ_paper.pdf), [GitHub](https://github.com/Open-Reasoner-Zero/Open-Reasoner-Zero) | (omnibus → [PPO-Data](https://yam.gift/2025/02/27/NLP/LLM-Training/2025-02-27-LLM-PostTrain-PPO-Data/)) |
+| Online-DPO-R1 | Online-DPO-R1: Effective Reasoning Without the PPO Overhead | Salesforce | 2025 | [paper](https://efficient-unicorn-451.notion.site/Online-DPO-R1-Unlocking-Effective-Reasoning-Without-the-PPO-Overhead-1908b9a70e7b80c3bc83f4cf04b2f175), [GitHub](https://github.com/RLHFlow/Online-DPO-R1) | [R1 相关：DPO 数据选择与 DPO 等 RL 算法](https://yam.gift/2025/03/02/NLP/LLM-Training/2025-03-02-LLM-PostTrain-DPO-Data/) |
+| LIMD | LIMD: Less is More on DPO Data | — | 2025 | — | (omnibus → [DPO-Data](https://yam.gift/2025/03/02/NLP/LLM-Training/2025-03-02-LLM-PostTrain-DPO-Data/)) |
+| OREAL | Exploring the Limit of Outcome Reward for Math Reasoning | InternLM | 2025 | [paper](https://arxiv.org/abs/2502.06781), [GitHub](https://github.com/InternLM/OREAL) | *to-write* |
+| DeepScaleR | DeepScaleR: Surpassing O1-Preview with a 1.5B Model by Scaling RL | Agentica | 2025 | [paper](https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2), [GitHub](https://github.com/agentica-project/deepscaler) | (omnibus → [R1-New-Paradigm](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/)) |
+| L1 / LCPO | Controlling How Long A Reasoning Model Thinks With RL | CMU | 2025 | [paper](http://arxiv.org/abs/2503.04697), [GitHub](https://github.com/cmu-l3/l1) | (omnibus → [R1-New-Paradigm](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/)) |
+| MRT | Optimizing Test-Time Compute via Meta RL Fine-Tuning | CMU | 2025 | [paper](http://arxiv.org/abs/2503.07572), [GitHub](https://github.com/CMU-AIRe/MRT) | *to-write* |
+| ScalingLaw | Value-Based Deep RL Scales Predictably | Berkeley | 2025 | [paper](https://arxiv.org/abs/2502.04327) | *to-write* |
+
+### SLM Reasoning
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| PRIME | Process Reinforcement through Implicit Rewards | PRIME-RL | 2025 | [paper](https://curvy-check-498.notion.site/Process-Reinforcement-through-Implicit-Rewards-15f4fcb9c42180f1b498cc9b2eaf896f), [GitHub](https://github.com/PRIME-RL/PRIME) | (described in [R1-New-Paradigm](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/): 隐式 PRM——被训练为 ORM、被用作 PRM) |
+| rStar-Math | rStar-Math: Small LLMs Can Master Math Reasoning | Microsoft | 2025 | [paper](https://arxiv.org/abs/2501.04519), [GitHub](https://github.com/microsoft/rStar) | (described in [R1-New-Paradigm](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/): 关键节点对中间结果做规则验证（Python 代码执行）) |
+| rStar | rStar: Mutual Reasoning Makes Smaller LLMs Stronger | Microsoft | 2024 | [paper](https://arxiv.org/pdf/2408.06195), [GitHub](https://github.com/zhentingqi/rStar) | *to-write* |
+
+### Reward Model (modeling / data / verifier)
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| GRM | Inference-Time Scaling for Generalist Reward Modeling | DeepSeek | 2025 | [paper](https://arxiv.org/abs/2504.02495) | [Reward Model 建模](https://yam.gift/2025/06/09/NLP/LLM-Training/2025-06-09-RM-Modeling/) |
+| Skywork-Reward-V2 | Skywork-Reward-V2 | Skywork | 2025 | [paper](https://arxiv.org/abs/2507.01352) | [Reward 数据如何塑造与激发推理策略](https://yam.gift/2025/07/13/NLP/LLM-Training/2025-07-13-RM-Data/) |
+| Spurious Rewards | Spurious Rewards: Rethinking Training Signals in RLVR | Allen | 2025 | [paper](https://arxiv.org/abs/2506.10947) | (omnibus → [RM-Data](https://yam.gift/2025/07/13/NLP/LLM-Training/2025-07-13-RM-Data/) / [GRPO-Clip](https://yam.gift/2025/09/12/NLP/LLM-Training/2025-09-12-GRPO-Clip/)) |
+| ICM | Anthropic Internal Coherence Maximization | Anthropic | 2025 | [blog](https://www.anthropic.com/research) | (omnibus → [RM-Data](https://yam.gift/2025/07/13/NLP/LLM-Training/2025-07-13-RM-Data/)) |
+| DeepSeekMath-V2 | Towards Self-Verifiable Mathematical Reasoning | DeepSeek | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-Math-V2), [GitHub](https://github.com/deepseek-ai/DeepSeek-Math-V2) | [DeepSeekMath-V2 自我验证：搞数据的风吹到了 RM](https://yam.gift/2025/11/29/NLP/LLM-Training/2025-11-29-Reward-Data-Self-Verified/) |
+
+### Verifier-Free RL (internal-feedback RL)
+
+> One blog ([Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) covers the algorithms below — listed individually for searchability.
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| NOVER | NOVER: Incentive Training without External Verifiers | — | 2025 | [paper](https://arxiv.org/abs/2505.16022) | [无验证器 RL 与 Reference 的妙用](https://yam.gift/2025/11/11/NLP/LLM-Training/2025-11-11-RM-New-Paradigm-Verifier-Free-RL/) |
+| TTRL | TTRL: Test-Time Reinforcement Learning | — | 2025 | [paper](https://arxiv.org/abs/2504.16084) | [无验证 RL——当模型只能相信自己](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/) |
+| SRT | Can Large Reasoning Models Self-Train? | — | 2025 | [paper](https://arxiv.org/abs/2505.21444) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| EM | The Unreasonable Effectiveness of Entropy Minimization in LLM Reasoning | — | 2025 | [paper](https://arxiv.org/abs/2505.15134) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/); covers EM-FT / EM-RL / EM-INF) |
+| RENT | Maximizing Confidence Alone Improves Reasoning | — | 2025 | [paper](https://arxiv.org/abs/2505.22660) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| EMPO | Right Question is Already Half the Answer: Fully Unsupervised LLM Reasoning Incentivization | — | 2025 | [paper](https://arxiv.org/abs/2504.05812) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| Intuitor | Learning to Reason without External Rewards | — | 2025 | [paper](https://arxiv.org/abs/2505.19590) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| ETTRL | ETTRL: Balancing Exploration and Exploitation via Entropy Mechanism | — | 2025 | [paper](https://arxiv.org/abs/2508.11356) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| Darling | Jointly Reinforcing Diversity and Quality in Language Model Generations | — | 2025 | [paper](https://arxiv.org/abs/2509.02534) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| EVOL-RL | Evolving Language Models without Labels: Majority Drives Selection, Novelty Promotes Variation | — | 2025 | [paper](https://arxiv.org/abs/2509.15194) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| RESTRAIN | RESTRAIN: From Spurious Votes to Signals — Self-Driven RL with Self-Penalization | — | 2025 | [paper](https://arxiv.org/abs/2510.02172) | (omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+| No Free Lunch | No Free Lunch: Rethinking Internal Feedback for LLM Reasoning | — | 2025 | [paper](https://arxiv.org/abs/2506.17219) | (theoretical critique of Verify-Free; omnibus → [Verify-Free RL](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/)) |
+
+### Alignment Classics
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| RLHF | Training language models to follow instructions with human feedback | OpenAI | 2022 | [paper](https://arxiv.org/abs/2203.02155) | [HuggingLLM 1.3.3：RLHF 流程与思想](https://github.com/datawhalechina/hugging-llm/blob/main/docs/chapter1/chapter1.md) |
+| RLOO | Back to Basics: Revisiting REINFORCE Style Optimization for RLHF | Cohere | 2024 | [paper](https://arxiv.org/abs/2402.14740) | (derived in [GiGPO](https://yam.gift/2025/07/25/NLP/LLM-Training/2025-07-25-GiGPO/): GRPO with Fnorm=1 ≡ RLOO) |
+| ReMax | ReMax: A Simple, Effective, and Efficient RL Method for LLM | CUHK | 2024 | [paper](https://arxiv.org/abs/2310.10505) | (contrasted in [Reinforce++](https://yam.gift/2025/10/24/NLP/LLM-Training/2025-10-24-ReinforcePP/): greedy-baseline variant — inefficient because greedy response is unused for training) |
+
+### MoE RL Stability
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| R3 | Stabilizing MoE RL by Aligning Training and Inference Routers | Xiaomi | 2025 | [paper](https://arxiv.org/abs/2510.11370) | [稳定压倒一切：MoE RL 训推不一致问题及解决策略](https://yam.gift/2026/01/17/NLP/LLM-Training/2026-01-17-RL-MoE-Stable/) |
+| IcePop | Small Leak Can Sink a Great Ship — Boost RL Training on MoE | Ant | 2025 | [paper](https://ringtech.notion.site/icepop) | (omnibus → [RL-MoE-Stable](https://yam.gift/2026/01/17/NLP/LLM-Training/2026-01-17-RL-MoE-Stable/)) |
+| TIS | Your Efficient RL Framework Secretly Brings You Off-Policy RL Training | UCSD | 2025 | [paper](https://fengyao.notion.site/off-policy-rl) | (omnibus → [RL-MoE-Stable](https://yam.gift/2026/01/17/NLP/LLM-Training/2026-01-17-RL-MoE-Stable/)) |
+| KAT | KAT-Coder Tech Report | Kuaishou | 2026 | [blog](https://kwai-kat.github.io/) | [MoE RL 训练不稳定性再思考：训推不一致，还是采样噪声？](https://yam.gift/2026/01/22/NLP/LLM-Training/2026-01-22-RL-MoE-Stable-2/) |
+
+### Optimization Algorithms (GRPO Family + Classics)
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| GRPO | DeepSeekMath: Pushing the Limits of Mathematical Reasoning | DeepSeek | 2024 | [paper](https://arxiv.org/abs/2402.03300) | (covered in [DAPO](https://yam.gift/2025/03/19/NLP/LLM-Training/2025-03-19-LLM-PostTrain-DAPO/) and [R1](https://yam.gift/2025/02/17/NLP/LLM-Training/2025-02-17-DeepSeek-R1/)) |
+| DAPO | DAPO: An Open-Source LLM RL System at Scale | ByteDance Seed | 2025 | [paper](https://arxiv.org/abs/2503.14476), [GitHub](https://github.com/BytedTsinghua-SIA/DAPO) | [DAPO：为 GRPO 锦上添四点花](https://yam.gift/2025/03/19/NLP/LLM-Training/2025-03-19-LLM-PostTrain-DAPO/) |
+| Dr.GRPO | Understanding R1-Zero-Like Training: A Critical Perspective | Sea AI Lab | 2025 | [paper](http://arxiv.org/abs/2503.20783), [GitHub](https://github.com/sail-sg/understand-r1-zero) | [异曲同工的 Dr.GRPO](https://yam.gift/2025/03/28/NLP/LLM-Training/2025-03-28-LLM-PostTrain-DrGRPO/) |
+| VAPO | VAPO: Efficient and Reliable RL for Advanced Reasoning | ByteDance Seed | 2025 | [paper](https://arxiv.org/abs/2504.05118) | [VAPO：基于价值方法的新突破](https://yam.gift/2025/04/19/NLP/LLM-Training/2025-04-19-VAPO/) |
+| CISPO | MiniMax-M1: Scaling Test-Time Compute Efficiently | MiniMax | 2025 | [paper](https://arxiv.org/abs/2506.13585), [GitHub](https://github.com/MiniMax-AI/MiniMax-M1) | [GRPO 优化在继续：CISPO 和熵](https://yam.gift/2025/06/19/NLP/LLM-Training/2025-06-19-CISPO-and-Entropy/) |
+| GiGPO | Group-in-Group Policy Optimization for LLM Agent Training | NTU, Skywork AI | 2025 | [paper](https://arxiv.org/abs/2505.10978), [GitHub](https://github.com/langfengQ/verl-agent) | [GiGPO：双层级优势函数驱动的 Agent RL 新范式](https://yam.gift/2025/07/25/NLP/LLM-Training/2025-07-25-GiGPO/) |
+| GSPO | Group Sequence Policy Optimization | Qwen | 2025 | [paper](https://arxiv.org/abs/2507.18071) | [Token Level X：DAPO/DrGRPO 与 GSPO/GMPO 的殊途同归](https://yam.gift/2025/08/14/NLP/LLM-Training/2025-08-14-Token-Level-GSPO-GMPO/) |
+| GMPO | Geometric-Mean Policy Optimization | UCAS, Microsoft | 2025 | [paper](https://arxiv.org/abs/2507.20673), [GitHub](https://github.com/callsys/GMPO) | (omnibus → [Token-Level-GSPO-GMPO](https://yam.gift/2025/08/14/NLP/LLM-Training/2025-08-14-Token-Level-GSPO-GMPO/)) |
+| GTPO | GTPO: Trajectory-Based Policy Optimization in LLMs | — | 2025 | [paper](https://arxiv.org/abs/2508.03772) | [GRPO「第一背锅侠」X2：GTPO 双 T 傍地走](https://yam.gift/2025/08/30/NLP/LLM-Training/2025-08-30-GTPO/) |
+| Reinforce++ | REINFORCE++: Stabilizing Critic-Free Policy Optimization | OpenRLHF | 2025 | [paper](https://arxiv.org/abs/2501.03262), [GitHub](https://github.com/OpenRLHF/OpenRLHF) | [Reinforce++ 和它的 KL Loss 选择](https://yam.gift/2025/10/24/NLP/LLM-Training/2025-10-24-ReinforcePP/) |
+| KimiRL | Kimi k1.5: Scaling RL with LLMs | Kimi | 2025 | [paper](https://arxiv.org/abs/2501.12599) | (omnibus → [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/)) |
+| AGAPO | EXAONE 4.0: Unified LLM Integrating Non-reasoning and Reasoning Modes | LG AI | 2025 | [paper](https://arxiv.org/abs/2507.11407) | (omnibus → [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/)) |
+| K-EXAONE | EXAONE-2 Tech Report | LG AI | 2026 | [paper](https://arxiv.org/abs/2601.01739) | (omnibus → [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/)) |
+| MOPD | MiMo-V2-Flash Technical Report | Xiaomi | 2026 | [paper](https://arxiv.org/abs/2601.02780) | (omnibus → [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/)) |
+| SAPO | Soft Adaptive Policy Optimization | Qwen | 2026 | [paper](https://arxiv.org/abs/2511.20347) | (omnibus → [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/)) |
+| DCPO | DCPO: Dynamic Clipping Policy Optimization | Baichuan | 2025 | [paper](https://arxiv.org/abs/2509.02333), [GitHub](https://github.com/lime-RL/DCPO) | (described in [GRPO-Clip](https://yam.gift/2025/09/12/NLP/LLM-Training/2025-09-12-GRPO-Clip/): token 先验概率自适应 clip 边界，扩大低概率 token 的探索空间) |
+| OPO | On-Policy RL with Optimal Reward Baseline | Microsoft | 2025 | [paper](https://arxiv.org/abs/2505.23585) | (described in [Token-Level-GSPO-GMPO](https://yam.gift/2025/08/14/NLP/LLM-Training/2025-08-14-Token-Level-GSPO-GMPO/): 最优奖励基线最小化梯度方差; contrasted in [GTPO](https://yam.gift/2025/08/30/NLP/LLM-Training/2025-08-30-GTPO/): 关注 advantage/reward 而非 token 粒度) |
+| SRPO | SRPO: Cross-Domain Implementation of Large-Scale RL on LLM | Kuaishou | 2025 | [paper](https://arxiv.org/abs/2504.14286), [HF](https://huggingface.co/Kwaipilot/SRPO-Qwen-32B) | (contrasted in [Token-Level-GSPO-GMPO](https://yam.gift/2025/08/14/NLP/LLM-Training/2025-08-14-Token-Level-GSPO-GMPO/): 历史重采样保留关键样本以提高样本利用率) |
+| DPO | Direct Preference Optimization | Stanford | 2024 | [paper](https://arxiv.org/abs/2305.18290) | (compared inside [DPO-Data](https://yam.gift/2025/03/02/NLP/LLM-Training/2025-03-02-LLM-PostTrain-DPO-Data/)) |
+| PPO | Proximal Policy Optimization Algorithms | OpenAI | 2017 | [paper](https://arxiv.org/abs/1707.06347) | (extended in [VAPO](https://yam.gift/2025/04/19/NLP/LLM-Training/2025-04-19-VAPO/): Value-based Augmented PPO with GAE refinements / value-pretraining; contrasted in [Reinforce++](https://yam.gift/2025/10/24/NLP/LLM-Training/2025-10-24-ReinforcePP/): PPO with critic vs critic-free Reinforce-style) |
+| REINFORCE | Simple Statistical Gradient-Following Algorithms | Northeastern | 1992 | [paper](https://people.cs.umass.edu/~barto/courses/cs687/williams92simple.pdf) | (extended in [CISPO](https://yam.gift/2025/06/19/NLP/LLM-Training/2025-06-19-CISPO-and-Entropy/): REINFORCE + IS → CISPO loss; framed in [Open-LLM-RL-ShowCase](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/): REINFORCE-with-baseline as analytic frame for all GRPO variants) |
+
+### Pre-R1 Foundations (Historical Anchors)
+
+> Pre-R1 RL × NLP works the author considers personally important. Kept here for sentimental and historical reasons rather than as active reading. The author's full reflection: [《通向 AGI 的技术路径：多模态、强化学习与新架构的交汇点》](https://yam.gift/2026/01/25/AI/2026-01-25-AI-Future-Framework/) — *"22 年 RL4LMs 出来后我兴奋的晚上觉都没睡着，第一时间就读了他们的代码。"*
+
+| Abbr | Title | From | Year | Link | Note |
+|------|-------|------|------|------|------|
+| RL4LMs / NLPO | RL (Not) for NLP: Benchmarks, Baselines, Building Blocks | Allen | 2022 | [paper](http://arxiv.org/abs/2210.01241), [GitHub](https://github.com/allenai/rl4lms) | Personally cited milestone in [AI-Future-Framework](https://yam.gift/2026/01/25/AI/2026-01-25-AI-Future-Framework/) — first felt RL × NLP could really land |
+| FTHP | Fine-Tuning Language Models from Human Preferences | OpenAI | 2020 | [paper](http://arxiv.org/abs/1909.08593), [GitHub](https://github.com/openai/lm-human-preferences) | OpenAI's earliest RLHF experiment; the seed of InstructGPT/ChatGPT |
+| Quark | Quark: Controllable Text Generation with Reinforced [Un]learning | Allen | 2022 | [paper](http://arxiv.org/abs/2205.13636), [GitHub](https://github.com/GXimingLu/Quark) | Early attempt at RL for controllable generation × unlearning — niche but conceptually clean |
+| DT | Decision Transformer: RL via Sequence Modeling | Berkeley | 2021 | [paper](https://arxiv.org/abs/2106.01345), [GitHub](https://github.com/kzl/decision-transformer) | The "RL = sequence modeling" reframing — a parallel branch that diverged from the LLM-RL trunk |
+
+### Frontier RL — Boundary, Process Reward & Experience
+
+> Pure RL frontier: where the *training* loop itself is being pushed (boundary, process reward, experience-as-data, planning-as-data).
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| DeepSeek-V3.2 Post-train | DeepSeek-V3.2 Tech Report | DeepSeek | 2025 | [paper](https://github.com/deepseek-ai/DeepSeek-V3) | [DeepSeek V3.2 后训练：稳定压倒一切](https://yam.gift/2025/12/03/NLP/LLM-Training/2025-12-03-DeepSeek-V32-PostTraining/) |
+| RL Boundary (Yue) | Does RL Really Incentivize Reasoning Capacity Beyond the Base Model? | — | 2025 | [paper](https://arxiv.org/abs/2504.13837) | [RL 究竟能不能突破 Base 边界](https://yam.gift/2025/12/31/NLP/LLM-Training/2025-12-31-RL-Are-You-OK/) |
+| Invisible Leash | Invisible Leash | Wu et al. | 2025 | [paper](https://arxiv.org/abs/2507.14843) | (omnibus → [RL-Are-You-OK](https://yam.gift/2025/12/31/NLP/LLM-Training/2025-12-31-RL-Are-You-OK/)) |
+| ProRL | ProRL: Prolonged RL Expands Reasoning Boundaries | NVIDIA | 2025 | [paper](https://arxiv.org/abs/2505.24864) | (omnibus → [RL-Are-You-OK](https://yam.gift/2025/12/31/NLP/LLM-Training/2025-12-31-RL-Are-You-OK/)) |
+| DELTA | DELTA: Dense Process Reward for RL Boundary Extrapolation | — | 2025 | — | (omnibus → [RL-Are-You-OK](https://yam.gift/2025/12/31/NLP/LLM-Training/2025-12-31-RL-Are-You-OK/)) |
+| ERL | Experience-as-RL | — | 2026 | [paper](https://arxiv.org/abs/2602.13949) | [RL 新范式：从经验到更高质量数据](https://yam.gift/2026/03/29/NLP/LLM-Training/2026-03-29-RL-New-Paradigm-Data/) |
+| MR-Search | MR-Search: Meta-Reasoning Search | — | 2026 | [paper](https://arxiv.org/abs/2603.11327) | (omnibus → [RL-New-Paradigm-Data](https://yam.gift/2026/03/29/NLP/LLM-Training/2026-03-29-RL-New-Paradigm-Data/)) |
+| OEL | Open-Ended Learning | — | 2026 | [paper](https://arxiv.org/abs/2603.16856) | (omnibus → [RL-New-Paradigm-Data](https://yam.gift/2026/03/29/NLP/LLM-Training/2026-03-29-RL-New-Paradigm-Data/)) |
+| LEPA | LEPA: Learn to Plan before Answering | — | 2025 | [paper](https://arxiv.org/abs/2505.00031) | [从「会答」到「会想」：Planning as Data 与思考范式重构](https://yam.gift/2026/04/17/NLP/LLM-Training/2026-04-17-Think-Strategy/) |
+| Self-Steering | Self-Steering | — | 2025 | [paper](https://arxiv.org/abs/2504.07081) | (omnibus → [Think-Strategy](https://yam.gift/2026/04/17/NLP/LLM-Training/2026-04-17-Think-Strategy/)) |
+
+### Beyond RL — Training-Free / Behavior Shaping / Real-time PEFT
+
+> *Post-RL* directions covered in the same blogs. The paradigm is moving away from classical RL training, into context, behavior, and parameter-efficient adaptation. They are not RL by the textbook definition, but they share the same goal — shape model behavior — and several of them (Activation Steering, Context Engineering) are the **upstream signals** that Training-Free RL only later named explicitly.
+
+| Abbr | Title | From | Year | Link | My Notes |
+|------|-------|------|------|------|----------|
+| TRT | Test-time Recursive Thinking: Self-Improvement without External Feedback | Microsoft | 2026 | [paper](https://arxiv.org/abs/2602.03094) | [Training-Free RL：当训练不再更新参数，而是更新上下文](https://yam.gift/2026/03/24/NLP/LLM-Training/2026-03-24-RL-New-Paradigm-Traning-Free/) |
+| Training-Free GRPO | Training-Free Group Relative Policy Optimization | — | 2025 | [paper](https://arxiv.org/abs/2510.08191) | (omnibus → [Training-Free RL](https://yam.gift/2026/03/24/NLP/LLM-Training/2026-03-24-RL-New-Paradigm-Traning-Free/)) |
+| MemAPO | MemAPO: Memory-Augmented Policy Optimization | — | 2026 | [paper](https://arxiv.org/abs/2603.21520) | (omnibus → [Training-Free RL](https://yam.gift/2026/03/24/NLP/LLM-Training/2026-03-24-RL-New-Paradigm-Traning-Free/)) |
+| Update-Free Steering | Update-Free On-Policy Steering via Verifiers | — | 2026 | [paper](https://arxiv.org/abs/2603.10282) | (omnibus → [Training-Free RL](https://yam.gift/2026/03/24/NLP/LLM-Training/2026-03-24-RL-New-Paradigm-Traning-Free/)) |
+| Activation Engineering | Steering Language Models With Activation Engineering | — | 2023 | [paper](https://arxiv.org/abs/2308.10248) | [激活诱导 LLM 指令跟随](https://yam.gift/2025/07/01/NLP/LLM-IF/2025-07-01-Activation-Steering/) |
+| Activation Steering (IF) | Improving Instruction-Following in Language Models through Activation Steering | Microsoft | 2024 | [paper](https://arxiv.org/abs/2410.12877) | (omnibus → [激活诱导 LLM 指令跟随](https://yam.gift/2025/07/01/NLP/LLM-IF/2025-07-01-Activation-Steering/)) |
+| Context Engineering | Context Engineering for AI Agents: Lessons from Building Manus | Manus | 2025 | [blog](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) | [重识 LLM 法则：上下文工程与数据进化](https://yam.gift/2025/07/27/NLP/LLM-Context/2025-07-27-Context-Engineering-and-Data/) |
+| MiCA | MiCA: Minor-Component Adaptation | — | 2026 | [paper](https://arxiv.org/abs/2604.01694) | [实时学习：极致高效的子空间微调](https://yam.gift/2026/04/11/NLP/LLM-Training/2026-04-11-Real-time-Learning-from-PEFT/) |
+| TinyLoRA | TinyLoRA | — | 2026 | — | (omnibus → [Real-time-Learning-from-PEFT](https://yam.gift/2026/04/11/NLP/LLM-Training/2026-04-11-Real-time-Learning-from-PEFT/)) |
+
+---
+
+## Chronological Blog Timeline
+
+All blog posts in publishing order, with the author's one-sentence takeaway. Use this when you want to *follow the narrative arc* rather than search by paper.
+
+| Date | Track | Blog (Chinese) | One-sentence takeaway |
+|------|-------|----------------|------------------------|
+| 2025-02-17 | 01 | [DeepSeek R1 深度技术解析及其影响](https://yam.gift/2025/02/17/NLP/LLM-Training/2025-02-17-DeepSeek-R1/) | Data sets the ceiling, algorithms approach it; pure rule-based RL works. |
+| 2025-02-18 | 01 | [少量高质量数据 SFT 激活推理](https://yam.gift/2025/02/18/NLP/LLM-Training/2025-02-18-LLM-PostTrain-SFT-Data/) | LIMO/s1: small high-quality SFT *activates* reasoning, doesn't *teach* it. |
+| 2025-02-27 | 01 | [R1 相关：RL 数据选择与 Scaling](https://yam.gift/2025/02/27/NLP/LLM-Training/2025-02-27-LLM-PostTrain-PPO-Data/) | LIMR/ORZ: less-is-more applies to RL data, not just SFT. |
+| 2025-03-02 | 01 | [R1 相关：DPO 数据选择与 DPO 等 RL 算法](https://yam.gift/2025/03/02/NLP/LLM-Training/2025-03-02-LLM-PostTrain-DPO-Data/) | Online-DPO can rival PPO when paired with the right data pipeline. |
+| 2025-03-15 | 01 | [DeepSeek R1 后 LLM 新范式](https://yam.gift/2025/03/15/NLP/LLM-Training/2025-03-15-R1-New-Paradigm/) | The post-R1 path forks into multiple parallel lines (length, scaling, MRT, …). |
+| 2025-03-19 | 02 | [DAPO：为 GRPO 锦上添四点花](https://yam.gift/2025/03/19/NLP/LLM-Training/2025-03-19-LLM-PostTrain-DAPO/) | DAPO = Clip-Higher + Dynamic Sampling + Token-Level Loss + Overlong Reward Shaping. |
+| 2025-03-28 | 02 | [异曲同工的 Dr.GRPO](https://yam.gift/2025/03/28/NLP/LLM-Training/2025-03-28-LLM-PostTrain-DrGRPO/) | Dr.GRPO removes the length & std normalization biases hidden in vanilla GRPO. |
+| 2025-04-10 | 01 | [R1-Zero 的进一步理解和探索](https://yam.gift/2025/04/10/NLP/LLM-Training/2025-04-10-Think-More-about-R1-Zero/) | R1-Zero behavior depends heavily on base model; "Aha moment" is partly base-pretrain artifact. |
+| 2025-04-19 | 02 | [VAPO：基于价值方法的新突破](https://yam.gift/2025/04/19/NLP/LLM-Training/2025-04-19-VAPO/) | Value-based methods come back to compete with critic-free GRPO. |
+| 2025-04-26 | 01 | [Yarz-Logic：R1-Zero 相关实验报告](https://yam.gift/2025/04/26/NLP/LLM-Training/2025-04-26-R1-Zero-Lab-Yarz-Logic/) | Hands-on Logic-RL replication: where R1-Zero's edges are in practice. |
+| 2025-05-01 | 01 | [R1 后范式最佳实践：Seed-Thinking 和 Qwen3](https://yam.gift/2025/05/01/NLP/LLM-Training/2025-05-01-Seed-Thinking-Qwen3/) | Seed-Thinking + Qwen3 are the two most complete industrial post-R1 recipes. |
+| 2025-06-09 | 03 | [Reward Model 建模](https://yam.gift/2025/06/09/NLP/LLM-Training/2025-06-09-RM-Modeling/) | General-domain RM needs principles+critique, not a single scalar (DeepSeek-GRM). |
+| 2025-06-19 | 02 | [GRPO 优化在继续：CISPO 和熵](https://yam.gift/2025/06/19/NLP/LLM-Training/2025-06-19-CISPO-and-Entropy/) | CISPO shows clip is not just stability — it shapes the explore/exploit edge. |
+| 2025-07-01 | 05 | [激活诱导 LLM 指令跟随](https://yam.gift/2025/07/01/NLP/LLM-IF/2025-07-01-Activation-Steering/) | Activation Steering: behavior shaping without weight updates — the prequel to Update-Free Steering. |
+| 2025-07-13 | 03 | [Reward 数据如何塑造与激发推理策略](https://yam.gift/2025/07/13/NLP/LLM-Training/2025-07-13-RM-Data/) | Good reward data unlocks pre-existing strategies; even spurious rewards can do this. |
+| 2025-07-25 | 02 | [GiGPO：双层级优势函数驱动的 Agent RL 新范式](https://yam.gift/2025/07/25/NLP/LLM-Training/2025-07-25-GiGPO/) | Agent RL needs hierarchical (group-in-group) advantages for proper credit assignment. |
+| 2025-07-27 | 05 | [重识 LLM 法则：上下文工程与数据进化](https://yam.gift/2025/07/27/NLP/LLM-Context/2025-07-27-Context-Engineering-and-Data/) | "Everything is context" — the early manifesto behind Training-Free RL. |
+| 2025-08-14 | 02 | [Token Level X：DAPO/DrGRPO 与 GSPO/GMPO 的殊途同归](https://yam.gift/2025/08/14/NLP/LLM-Training/2025-08-14-Token-Level-GSPO-GMPO/) | Token-level vs sequence-level is THE axis of the GRPO family. |
+| 2025-08-30 | 02 | [GRPO「第一背锅侠」X2：GTPO 双 T 傍地走](https://yam.gift/2025/08/30/NLP/LLM-Training/2025-08-30-GTPO/) | GTPO: trajectory-level view exposes more of GRPO's hidden assumptions. |
+| 2025-09-12 | 02 | [GRPO-Clip：DAPO/GMPO/Spurious Rewards 等 clip 变体对照](https://yam.gift/2025/09/12/NLP/LLM-Training/2025-09-12-GRPO-Clip/) | Side-by-side: Clip-Higher vs Clip-Wider vs Spurious Rewards on the same axis. |
+| 2025-10-24 | 02 | [Reinforce++ 和它的 KL Loss 选择](https://yam.gift/2025/10/24/NLP/LLM-Training/2025-10-24-ReinforcePP/) | KL Loss choice (k2 vs k3) matters more than usually credited. |
+| 2025-11-11 | 03 | [无验证器 RL 与 Reference 的妙用](https://yam.gift/2025/11/11/NLP/LLM-Training/2025-11-11-RM-New-Paradigm-Verifier-Free-RL/) | Without verifiers, use PPL / reference-likelihood / reverse-self-eval as proxies. |
+| 2025-11-29 | 03 | [DeepSeekMath-V2 自我验证：搞数据的风吹到了 RM](https://yam.gift/2025/11/29/NLP/LLM-Training/2025-11-29-Reward-Data-Self-Verified/) | Reward should model "where the answer is wrong"; generation ↔ verification co-evolve. |
+| 2025-12-03 | 02 | [DeepSeek V3.2 后训练：稳定压倒一切](https://yam.gift/2025/12/03/NLP/LLM-Training/2025-12-03-DeepSeek-V32-PostTraining/) | Industry's MoE post-train recipe: stability above all else. |
+| 2025-12-21 | 03 | [无验证 RL——当模型只能相信自己](https://yam.gift/2025/12/21/NLP/LLM-Training/2025-12-21-RM-New-Paradigm-Verify-Free-RL/) | All internal-feedback methods compress entropy → exploration crisis sooner or later. |
+| 2025-12-31 | 05 | [RL 究竟能不能突破 Base 边界](https://yam.gift/2025/12/31/NLP/LLM-Training/2025-12-31-RL-Are-You-OK/) | Most RL is sampling polish; true extrapolation needs edge data + process reward. |
+| 2026-01-14 | 02 | [开源大模型 RL Showcase：Kimi/EXAONE/MiMo/MiniMax/Qwen](https://yam.gift/2026/01/14/NLP/LLM-Training/2026-01-14-Open-LLM-RL-ShowCase/) | 5 industrial GRPO variants compared side-by-side — every team is patching the same holes. |
+| 2026-01-17 | 04 | [稳定压倒一切：MoE RL 训推不一致问题及解决策略](https://yam.gift/2026/01/17/NLP/LLM-Training/2026-01-17-RL-MoE-Stable/) | Train-infer router mismatch is the surface; R3 / IcePop / TIS each take a different angle. |
+| 2026-01-22 | 04 | [MoE RL 训练不稳定性再思考：训推不一致，还是采样噪声？](https://yam.gift/2026/01/22/NLP/LLM-Training/2026-01-22-RL-MoE-Stable-2/) | Even *recomputing* logprobs on MoE drifts; the deeper cause is sampling noise, not routing. |
+| 2026-03-24 | 05 | [Training-Free RL：当训练不再更新参数，而是更新上下文](https://yam.gift/2026/03/24/NLP/LLM-Training/2026-03-24-RL-New-Paradigm-Traning-Free/) | Advantage in text/context, not in weight space — fixed model can still "RL". |
+| 2026-03-29 | 05 | [RL 新范式：从经验到更高质量数据](https://yam.gift/2026/03/29/NLP/LLM-Training/2026-03-29-RL-New-Paradigm-Data/) | The loop becomes "trajectory → information gain → re-supervision". |
+| 2026-04-11 | 05 | [实时学习：极致高效的子空间微调](https://yam.gift/2026/04/11/NLP/LLM-Training/2026-04-11-Real-time-Learning-from-PEFT/) | MiCA/TinyLoRA: pluggable real-time learning by occupying the *minor* singular directions. |
+| 2026-04-17 | 05 | [从「会答」到「会想」：Planning as Data 与思考范式重构](https://yam.gift/2026/04/17/NLP/LLM-Training/2026-04-17-Think-Strategy/) | Reasoning becomes a *data format*; the next battle is how to construct planning data. |
+
+---
 
 ## Appendix
 
-- ① DeepSeek-R1相关复现：
-    - [Jiayi-Pan/TinyZero: Clean, minimal, accessible reproduction of DeepSeek R1-Zero](https://github.com/Jiayi-Pan/TinyZero)
-    - [huggingface/open-r1: Fully open reproduction of DeepSeek-R1](https://github.com/huggingface/open-r1)
-    - [hkust-nlp/simpleRL-reason: This is a replicate of DeepSeek-R1-Zero and DeepSeek-R1 training on small models with limited data](https://github.com/hkust-nlp/simpleRL-reason)
-    - [ZihanWang314/RAGEN: RAGEN is the first open-source reproduction of DeepSeek-R1 on AGENT training.](https://github.com/ZihanWang314/ragen)
+### ① DeepSeek-R1 Reproduction Resources
+
+- [Jiayi-Pan/TinyZero](https://github.com/Jiayi-Pan/TinyZero) — clean, minimal reproduction of DeepSeek R1-Zero
+- [huggingface/open-r1](https://github.com/huggingface/open-r1) — fully open reproduction of DeepSeek-R1
+- [hkust-nlp/simpleRL-reason](https://github.com/hkust-nlp/simpleRL-reason)
+- [ZihanWang314/RAGEN](https://github.com/ZihanWang314/ragen) — first open-source reproduction of DeepSeek-R1 on agent training
+
+### ② Citation / Feedback
+
+If this index or the linked blog posts are useful, leave a note on [GitHub Issues](https://github.com/hscspring/rl-llm-nlp/issues), or cite [yam.gift](https://yam.gift) when referencing.
+
+> "Don't chase the wind — chase the long view; measure one year by the yardstick of ten." — 长琴
