@@ -1,7 +1,7 @@
 # RL-LLM-NLP
 
 > **A curated, opinionated index of post-R1 LLM × Reinforcement Learning.**
-> Every paper is read, classified, cross-linked, and connected back to a Chinese deep-dive blog post by [hscspring (长琴)](https://yam.gift).
+> Every paper is read, classified, cross-linked, and connected back to a Chinese deep-dive blog post by [hscspring](https://yam.gift).
 
 I consider RL to be a pivotal technology in the field of AI, and NLP (particularly LLM) to be a direction well worth exploring. This repo focuses on **post-R1 LLM RL** specifically.
 
@@ -15,8 +15,6 @@ Awesome lists are *retrievers*. This repo is a *curator*.
 - **Personal historical anchors.** Pre-R1 works (RL4LMs, FTHP, Quark, DT) live in their own corner with a one-line *why I personally cared*, not as bibliography filler.
 
 **Topics covered**: DeepSeek-R1 reproduction · GRPO family (DAPO / Dr.GRPO / VAPO / CISPO / GiGPO / GSPO / GMPO / GTPO / Reinforce++) · PPO · RLHF · DPO · Reward Modeling · Verifier-Free RL · MoE RL Stability · Training-Free RL · Activation Steering · Agentic RL.
-
-> **Notes ("我的解读") link to Chinese blog posts on [yam.gift](https://yam.gift). The link text preserves the original Chinese title.**
 
 ---
 
