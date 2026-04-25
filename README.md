@@ -176,6 +176,7 @@ Notation for the **My Notes** column:
 
 | Abbr | Title | From | Year | Link | My Notes |
 |------|-------|------|------|------|----------|
+| COPO | Think Fast and Slow: Step-Level Cognitive Depth Adaptation for LLM Agents | Tencent | 2026 | [paper](https://arxiv.org/abs/2602.12662), [GitHub](https://github.com/rhyang2021/CogRouter) | [COPO：基于认知模式的 Step-Level RL 优化](https://yam.gift/2026/04/23/NLP/LLM-Training/2026-04-23-COPO/) |
 | GRPO | DeepSeekMath: Pushing the Limits of Mathematical Reasoning | DeepSeek | 2024 | [paper](https://arxiv.org/abs/2402.03300) | (covered in [DAPO](https://yam.gift/2025/03/19/NLP/LLM-Training/2025-03-19-LLM-PostTrain-DAPO/) and [R1](https://yam.gift/2025/02/17/NLP/LLM-Training/2025-02-17-DeepSeek-R1/)) |
 | DAPO | DAPO: An Open-Source LLM RL System at Scale | ByteDance Seed | 2025 | [paper](https://arxiv.org/abs/2503.14476), [GitHub](https://github.com/BytedTsinghua-SIA/DAPO) | [DAPO：为 GRPO 锦上添四点花](https://yam.gift/2025/03/19/NLP/LLM-Training/2025-03-19-LLM-PostTrain-DAPO/) |
 | Dr.GRPO | Understanding R1-Zero-Like Training: A Critical Perspective | Sea AI Lab | 2025 | [paper](http://arxiv.org/abs/2503.20783), [GitHub](https://github.com/sail-sg/understand-r1-zero) | [异曲同工的 Dr.GRPO](https://yam.gift/2025/03/28/NLP/LLM-Training/2025-03-28-LLM-PostTrain-DrGRPO/) |
